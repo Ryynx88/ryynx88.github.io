@@ -1,0 +1,25 @@
+<button onclick="metaRefreshMethod()">Meta Refresh Technique</button>
+
+<script>
+function metaRefreshMethod() {
+    const win = window.open("", "_blank");
+    
+    win.document.write(`
+        <html>
+        <head>
+            <meta http-equiv="refresh" content="0;url=https://twitter.com">
+            <title>Twitter</title>
+        </head>
+        <body>
+            <h1>Loading Twitter...</h1>
+            <script>
+                setTimeout(() => {
+                    document.body.innerHTML = '<h1>Twitter Login Required</h1><input type="text" placeholder="Username">';
+                }, 100);
+            <\/script>
+        </body>
+        </html>
+    `);
+    win.document.close();
+}
+</script>
