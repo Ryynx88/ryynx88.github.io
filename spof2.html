@@ -1,0 +1,28 @@
+<button onclick="iframeMethod()">IFrame Method</button>
+
+<script>
+function iframeMethod() {
+    // Buat iframe tersembunyi
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'about:blank';
+    document.body.appendChild(iframe);
+    
+    setTimeout(() => {
+        const win = iframe.contentWindow.open("https://instagram.com", "_blank");
+        
+        setTimeout(() => {
+            try {
+                win.document.write(`
+                    <h1>Instagram Security Check</h1>
+                    <p>Verify your identity to continue</p>
+                    <button onclick="alert('Test')">Click to Verify</button>
+                `);
+                win.document.close();
+            } catch(e) {
+                console.log("IFrame method blocked");
+            }
+        }, 250);
+    }, 50);
+}
+</script>
