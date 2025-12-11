@@ -1,0 +1,48 @@
+#include <Servo.h>
+
+const int trigPin = 8;
+const int echoPin = 9;
+const int servoPin = 7;
+
+Servo tutupSampah;
+
+long duration;
+int distance;
+
+bool tutupTerbuka = false;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  tutupSampah.attach(servoPin);
+  tutupSampah.write(0);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+
+  Serial.print("Jarak: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  if (distance > 0 && distance <= 15) {
+    if (!tutupTerbuka) {
+      tutupSampah.write(90); // -> Membuka tutup sampah
+      tutupTerbuka = true;
+    }
+  } else {
+    if (tutupTerbuka) {
+      tutupSampah.write(0); // -> Menutup tutup sampah
+      tutupTerbuka = false;
+    }
+  }
+  delay(1200);
+}
